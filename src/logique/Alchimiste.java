@@ -57,7 +57,7 @@ public class Alchimiste
 
     public boolean fairePotion(Recette recette)
     {
-        if(nom == null){
+        if(recette == null){
             throw new IllegalArgumentException(MESSAGE_VALEUR_NULL_NON_PERMISE);
         }
         boolean estReussi = false;
