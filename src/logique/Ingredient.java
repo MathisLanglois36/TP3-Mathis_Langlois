@@ -35,7 +35,7 @@ public class Ingredient
     }
 
     private void setPrix(int prix) {
-        if (prix < PRIX_INVALIDE){
+        if (prix <= PRIX_INVALIDE){
             throw new IllegalArgumentException(MESSAGE_PRIX_INVALIDE);
         }
         this.prix = prix;
