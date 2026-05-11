@@ -50,7 +50,7 @@ throw new IllegalArgumentException(MESSAGE_INGREDIENT_DOUBLE);
     private void setNom(String nom) {
         if (nom == null) {
             throw new IllegalArgumentException(MESSAGE_VALEUR_NULL_NON_PERMISE);
-        } else if (nom.length() > MIN_CARACTERES_NOM) {
+        } else if (nom.length() < MIN_CARACTERES_NOM) {
             throw new IllegalArgumentException(MESSAGE_NOM_TROP_COURT);
         }
         this.nom = nom;
