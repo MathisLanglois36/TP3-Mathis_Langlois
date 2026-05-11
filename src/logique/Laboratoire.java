@@ -11,12 +11,19 @@ import java.util.List;
 
 public class Laboratoire
 {
+    public static final String MESSAGE_VALEUR_NULL_NON_PERMISE = "Valeur null non permise";
+    public static final String MESSAGE_INGREDIENT_INEXISTANT = "Ingredient inexistant";
+    public static final String MESSAGE_RECETTE_NULL = "Recette null non permise";
+
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Recette> recettes;
     private Alchimiste proprietaire;
 
     public Laboratoire(Alchimiste alchimiste)
     {
+        if (alchimiste == null){
+            throw new IllegalArgumentException(MESSAGE_VALEUR_NULL_NON_PERMISE);
+        }
         this.chargerIngredients();
         this.chargerRecettes();
 
@@ -68,6 +75,10 @@ public class Laboratoire
             Ingredient ingredient2 = this.trouverIngredient(ing2);
             Ingredient ingredient3 = this.trouverIngredient(ing3);
 
+            if(ingredient1 == null || ingredient2 == null || ingredient3 == null){
+                throw new IllegalArgumentException(MESSAGE_INGREDIENT_INEXISTANT);
+            }
+
             recette = new Recette(ingredient1, ingredient2, ingredient3, nom, difficulte, pointExperience);
             ajouterRecette(recette);
         }
@@ -77,6 +88,9 @@ public class Laboratoire
 
     public Recette trouverRecette(String ing1, String ing2, String ing3)
     {
+        if (ing1 == null || ing2 == null || ing3 == null) {
+            throw new IllegalArgumentException(MESSAGE_INGREDIENT_INEXISTANT);
+        }
         Recette resultat = null;
 
         for(Recette element : this.recettes)
@@ -93,6 +107,9 @@ public class Laboratoire
 
     public Ingredient trouverIngredient(String nom)
     {
+        if (nom == null){
+            throw new IllegalArgumentException(MESSAGE_VALEUR_NULL_NON_PERMISE);
+        }
         Ingredient resultat = null;
 
         for (Ingredient ing : ingredients)
@@ -165,6 +182,9 @@ public class Laboratoire
 
     private void ajouterRecette(Recette recette)
     {
+        if (recette == null){
+            throw new IllegalArgumentException(MESSAGE_RECETTE_NULL);
+        }
         String nouvelleRecette = recette.toString();
         try(PrintWriter output = new PrintWriter(new FileWriter("src/recettes.txt",true)))
         {
